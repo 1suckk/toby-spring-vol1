@@ -13,7 +13,7 @@ Error는 메모리가 부족하는 등과 같이 **시스템이 비정상적인 
 ## Exception
 java.lang.Exception 클래스와 하위 클래스들은 Error와 달리 **애플리케이션 코드에서 예외가 발생하였을 경우**에 사용된다. 그리고 Exception 은 다시 체크 예외와 언체크 예외로 구분된다.
 
-### [[Checked Exception]]
+### Checked Exception
 **명시적인 예외처리를 강제**하기 때문에 체크 예외라고 불린다. 
 
 체크 예외는 **RuntimeException 클래스를 상속받지 않은 예외 클래스들**이다. 
@@ -28,7 +28,7 @@ java.lang.Exception 클래스와 하위 클래스들은 Error와 달리 **애플
 하지만 개발자가 모든 체크 예외를 처리해주어야 하므로 **번거로우며**, 신경쓰지 않고 싶은 예외까지 처리해야 한다는 단점이 있다.
 
 
-### [[Unchecked Exception]]
+### Unchecked Exception
 명시적인 예외처리를 강제하지 않기 때문에 언체크 예외라고 불린다. 
 
 
@@ -37,7 +37,7 @@ RuntimeException 클래스를 상속받는 예외 클래스들은 **복구 가�
 그래서  언체크 예외라고 불리는데, 언체크 예외는 Error와 마찬가지로 에러를 처리하지 않아도 컴파일 에러가 발생하지 않는다. 
 즉, 런타임 예외는 **예상치 못했던 상황에서 발생하는 것이 아니므로 굳이 예외 처리를 강제하지 않는다**. RuntimeException에는 대표적 NullPointerException이나 IllegalArgumentException 등과 같은 것들이 있다. 
 
-## java 예외와 스프링 [[@Transactional]]
+## java 예외와 스프링 @Transactional
 체크 예외와 언체크 예외의 차이를 아는 것은 매우 중요하다. 왜냐하면 스프링 프레임워크가 제공하는 선언적 트랜잭션(@Transactional)안에서 에러 발생 시 **체크 예외는 롤백이 되지 않고, 언체크 예외는 롤백**이 되기 때문이다. 
 이는 자바 언어와는 무관하게 프레임워크의 기능임을 반드시 알고 넘어가도록 하자. (물론 옵션을 변경할 수 있다.)
 
@@ -98,7 +98,7 @@ public void execute(final String sql) throws DataAccessException {
 
 두 가지 목적 
 - 의미를 분명하게 해주는 예외로 바꾸기 위해
-- [[Unchecked Exception]]인 런타임 예외로 바꾸기 위해
+- Unchecked Exception인 런타임 예외로 바꾸기 위해
 
 
 ```java
