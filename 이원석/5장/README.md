@@ -74,6 +74,33 @@ try {
 
 ## PSA
 
+```java
+public class UserService {
+    UserDao userDao;
+    DataSource dataSource;
+    PlatformTransactionManager transactionManager;
+    ...
+
+    public void upgradeLevels() {
+        // 트랜잭션 시작
+        TransactionStatus status =
+                transactionManager.getTransaction(new DefaultTransactionDefinition());
+
+        try {
+            List<User> users = userDao.getAll();
+            for (User user : users) {
+                if (canUpgradeLevel(user)) {
+                    upgradeLevel(user);
+                }
+            }
+
+            transactionManager.commit(status);
+        }catch(Exception e) {
+            transactionManager.rollback(status);
+            throw e;
+        }
+    }
+```
 
 
 스프링은 트랜잭션 기술의 공통점을 담은 트랜잭션 추상화 기술을 제공한다. 이를 이용하면 특정 기술에 종속되지 않고 트랜잭션 경계 설정 작업이 가능해진다.
@@ -88,4 +115,4 @@ UserDao와 UserService는 각각 담당하는 코드의 기능적인 관심에 �
 ![image](https://github.com/1suckk/toby-spring-vol1/assets/72124326/28ef44c7-8996-498e-9cb3-6791f2ea44d2)
 
 
-```
+출처: https://jake-seo-dev.tistory.com/230 [제이크서 위키 블로그:티스토리]
